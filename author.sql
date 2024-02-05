@@ -1,5 +1,5 @@
 CREATE TABLE "author"(
-    id_author uuid primary key,
+    id_author UUID DEFAULT uuid_generate_v4() primary key,
     name varchar(50) NOT NULL,
     first_name varchar(50) NOT NULL,
     biography varchar(250),
