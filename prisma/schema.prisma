@@ -1,0 +1,69 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model Author {
+  id_author   String   @id @default(uuid())
+  name        String
+  first_name  String
+  biography   String?
+  nationality String?
+  die_date    DateTime?
+  birth_date  DateTime?
+  books Book[]
+}
+
+model User {
+  id_user    String   @id @default(uuid())
+  name       String
+  first_name String
+  email      String
+  password   String
+  sign_date  DateTime @default(now())
+  matricule  String
+  role       Role    
+  borrows    Borrow[]
+}
+
+model Category {
+  id_category String   @id @default(uuid())
+  type        String
+  description String?
+  books       Book[]
+}
+
+model Book {
+  id_book     String   @id @default(uuid())
+  title        String
+  page         Int
+  langage      String
+  description  String?
+  parution_date DateTime  @default(now())
+  id_category String
+  category Category @relation(fields: [id_category], references: [id_category])
+  id_author  String
+  author Author? @relation(fields: [id_author], references: [id_author])
+    borrow Borrow[]
+}
+
+model Borrow {
+  id_borrow String   @id @default(uuid())
+  user User @relation(fields: [id_user], references: [id_user])
+  book Book @relation(fields: [id_book], references: [id_book])
+  id_user String
+  id_book String
+}
+
+enum Role{
+  USER
+  ADMIN
+}
