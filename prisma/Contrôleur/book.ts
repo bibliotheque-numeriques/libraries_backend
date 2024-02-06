@@ -24,11 +24,19 @@ export const createBook = async(req : Request, res : Response)=>{
 }
 
 export const getBook = async(req : Request, res: Response)=>{
-    const book = prisma.book.findFirst();
-    return res.json({book});
+    try {
+        const booksWithAuthorsAndCategories = await prisma.book.findMany({
+          include: {
+            author: true,
+            category: true,
+          },
+        });
+        res.json({booksWithAuthorsAndCategories});
+      } catch (error) {
+        res.status(500).json({ error: 'Could not fetch books with authors and categories' });
+      }
 }
 
-book.post('/book',createBook);
-book.get('/book',getBook);
+
 
 export default book;
