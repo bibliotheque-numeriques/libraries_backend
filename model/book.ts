@@ -37,10 +37,16 @@ app.post('/book/create', async (req : Request , res : Response) =>{
     return createBook;
 })
 
-app.get('/book/get', async(res : Response){
-    res.json
-    const post = await prisma.book.findMany({
-        
-    })
-      return post;
-})
+app.get('/book/get', async (res: Response) => {
+    try {
+      const books = await prisma.book.findMany({
+        orderBy: {title: 'asc'}
+      });
+   
+      res.json(books);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Failed to retrieve books' });
+    }
+   });
+   
