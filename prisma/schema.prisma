@@ -29,7 +29,7 @@ model User {
   password    String
   sign_date   DateTime @default(now())
   matricule   String
-  link_image_user String
+  link_image_user    String
   role        Role
   borrows     Borrow[]
 }

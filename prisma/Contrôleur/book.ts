@@ -6,7 +6,7 @@ const book = express();
 book.use(express.json());
 
 export const createBook = async(req : Request, res : Response)=>{
-    const {title, page,langage,description,parution_date,id_category,id_author } = req.body;
+    const {title, page,langage,description,parution_date,link_image_book,id_category,id_author } = req.body;
 
     const book = await prisma.book.create({
      data : {
@@ -15,6 +15,7 @@ export const createBook = async(req : Request, res : Response)=>{
         langage : langage,
         description : description,
         parution_date : parution_date,
+        link_image_book : link_image_book,
         id_category : id_category,
         id_author : id_author 
      }
