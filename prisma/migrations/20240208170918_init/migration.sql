@@ -3,11 +3,11 @@ CREATE TYPE "Role" AS ENUM ('USER', 'ADMIN');
 
 -- CreateTable
 CREATE TABLE "Author" (
-    "id_author" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
-    "first_name" TEXT NOT NULL,
+    "id_author" SERIAL NOT NULL,
+    "name" VARCHAR(150) NOT NULL,
+    "first_name" VARCHAR(150) NOT NULL,
     "biography" TEXT,
-    "nationality" TEXT,
+    "nationality" VARCHAR(30),
     "die_date" TIMESTAMP(3),
     "birth_date" TIMESTAMP(3),
 
@@ -16,13 +16,14 @@ CREATE TABLE "Author" (
 
 -- CreateTable
 CREATE TABLE "User" (
-    "id_user" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
-    "first_name" TEXT NOT NULL,
-    "email" TEXT NOT NULL,
+    "id_user" SERIAL NOT NULL,
+    "name" VARCHAR(150) NOT NULL,
+    "first_name" VARCHAR(150) NOT NULL,
+    "email" VARCHAR(150) NOT NULL,
     "password" TEXT NOT NULL,
     "sign_date" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "matricule" TEXT NOT NULL,
+    "link_image_user" TEXT NOT NULL,
     "role" "Role" NOT NULL,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id_user")
@@ -30,8 +31,8 @@ CREATE TABLE "User" (
 
 -- CreateTable
 CREATE TABLE "Category" (
-    "id_category" TEXT NOT NULL,
-    "type" TEXT NOT NULL,
+    "id_category" SERIAL NOT NULL,
+    "type" VARCHAR(150) NOT NULL,
     "description" TEXT,
 
     CONSTRAINT "Category_pkey" PRIMARY KEY ("id_category")
@@ -39,23 +40,24 @@ CREATE TABLE "Category" (
 
 -- CreateTable
 CREATE TABLE "Book" (
-    "id_book" TEXT NOT NULL,
-    "title" TEXT NOT NULL,
+    "id_book" SERIAL NOT NULL,
+    "title" VARCHAR(150) NOT NULL,
     "page" INTEGER NOT NULL,
-    "langage" TEXT NOT NULL,
+    "langage" VARCHAR(30) NOT NULL,
     "description" TEXT,
     "parution_date" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "id_category" TEXT NOT NULL,
-    "id_author" TEXT NOT NULL,
+    "link_image_book" TEXT NOT NULL,
+    "id_category" INTEGER NOT NULL,
+    "id_author" INTEGER NOT NULL,
 
     CONSTRAINT "Book_pkey" PRIMARY KEY ("id_book")
 );
 
 -- CreateTable
 CREATE TABLE "Borrow" (
-    "id_borrow" TEXT NOT NULL,
-    "id_user" TEXT NOT NULL,
-    "id_book" TEXT NOT NULL,
+    "id_borrow" SERIAL NOT NULL,
+    "id_user" INTEGER NOT NULL,
+    "id_book" INTEGER NOT NULL,
 
     CONSTRAINT "Borrow_pkey" PRIMARY KEY ("id_borrow")
 );
