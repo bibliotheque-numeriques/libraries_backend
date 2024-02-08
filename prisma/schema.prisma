@@ -10,59 +10,58 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model Author {
-  id_author   Integer   @id @default(autoincrement())
-  name        String
-  first_name  String
+  id_author   Int    @id @default(autoincrement())
+  name        String @db.VarChar(150)
+  first_name  String @db.VarChar(150)
   biography   String?
-  nationality String?
+  nationality String? @db.VarChar(30)
   die_date    DateTime?
   birth_date  DateTime?
-  books Book[]
+  books       Book[]
 }
 
 model User {
-  id_user    Integer   @id @default(autoincrement())
-  name       String
-  first_name String
-  email      String
-  password   String
-  sign_date  DateTime @default(now())
-  matricule  String
-  role       Role    
-  borrows    Borrow[]
-   link_image_user String
+  id_user     Int    @id @default(autoincrement())
+  name        String @db.VarChar(150)
+  first_name  String @db.VarChar(150)
+  email       String @db.VarChar(150)
+  password    String
+  sign_date   DateTime @default(now())
+  matricule   String
+  link_image_user String
+  role        Role
+  borrows     Borrow[]
 }
 
 model Category {
-  id_category Integer   @id @default(autoincrement())
-  type        String
+  id_category Int    @id @default(autoincrement())
+  type        String @db.VarChar(150)
   description String?
   books       Book[]
 }
 
 model Book {
-  id_book     Integer   @id @default(autoincrement())
-  title        String
-  page         Int
-  langage      String
-  description  String?
-  parution_date DateTime  @default(now())
-  id_category String
-  category Category @relation(fields: [id_category], references: [id_category])
-  id_author  String
-  author Author? @relation(fields: [id_author], references: [id_author])
-    borrow Borrow[]
+  id_book         Int      @id @default(autoincrement())
+  title           String   @db.VarChar(150)
+  page            Int
+  langage         String   @db.VarChar(30)
+  description     String?
+  parution_date   DateTime @default(now())
   link_image_book String
+  id_category     Int
+  category        Category @relation(fields: [id_category], references: [id_category])
+  id_author       Int
+  author          Author?  @relation(fields: [id_author], references: [id_author])
+  borrows         Borrow[]
 }
 
 model Borrow {
-  id_borrow Integer   @id @default(autoincrement())
-  user User @relation(fields: [id_user], references: [id_user])
-  book Book @relation(fields: [id_book], references: [id_book])
-  id_user String
-  id_book String
+  id_borrow Int  @id @default(autoincrement())
+  user      User @relation(fields: [id_user], references: [id_user])
+  book      Book @relation(fields: [id_book], references: [id_book])
+  id_user   Int
+  id_book   Int
 }
 
 enum Role{
