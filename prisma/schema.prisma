@@ -12,7 +12,7 @@ datasource db {
 
 
 model Author {
-  id_author   String   @id @default(uuid())
+  id_author   Integer   @id @default(autoincrement())
   name        String
   first_name  String
   biography   String?
@@ -23,7 +23,7 @@ model Author {
 }
 
 model User {
-  id_user    String   @id @default(uuid())
+  id_user    Integer   @id @default(autoincrement())
   name       String
   first_name String
   email      String
@@ -32,17 +32,18 @@ model User {
   matricule  String
   role       Role    
   borrows    Borrow[]
+   link_image_user String
 }
 
 model Category {
-  id_category String   @id @default(uuid())
+  id_category Integer   @id @default(autoincrement())
   type        String
   description String?
   books       Book[]
 }
 
 model Book {
-  id_book     String   @id @default(uuid())
+  id_book     Integer   @id @default(autoincrement())
   title        String
   page         Int
   langage      String
@@ -53,10 +54,11 @@ model Book {
   id_author  String
   author Author? @relation(fields: [id_author], references: [id_author])
     borrow Borrow[]
+  link_image_book String
 }
 
 model Borrow {
-  id_borrow String   @id @default(uuid())
+  id_borrow Integer   @id @default(autoincrement())
   user User @relation(fields: [id_user], references: [id_user])
   book Book @relation(fields: [id_book], references: [id_book])
   id_user String
