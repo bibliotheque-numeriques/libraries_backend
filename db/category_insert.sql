@@ -1,6 +1,5 @@
-insert into "category" (type, description) values ('litterature', 'a french book');
-insert into "category" (type, description) values ('fiction-science', 'an english book');
-insert into "category" (type, description) values ('litterature', 'malagasy book');
-insert into "category" (type, description) values ('action', 'an american book');
-insert into "category" (type, description) values ('romantic', 'an american book');
-insert into "category" (type, description) values ('BD', 'an french book entertainement');
+insert into "category" (type, description) values ('litterature', 'an interessant book');
+insert into "category" (type, description) values ('fiction-science', 'a book with a lot of imagination');
+insert into "category" (type, description) values ('action', 'a book with a lot of adrenaline');
+insert into "category" (type, description) values ('romantic', 'a book with lot of feelings');
+insert into "category" (type, description) values ('BD', 'an book with a lot of entertainment');
