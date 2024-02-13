@@ -38,6 +38,10 @@ npm i --save-dev @types/bcrypt
 ```
 npm install password-validator
 ```
+### Install CORS for security :
+```
+npm i cors
+```
 
 ## Apply the Prisma schema changes to the database :
 ```
