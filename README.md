@@ -47,4 +47,5 @@ npx prisma migrate dev --name tags-model
 ### Finally, for running the server :
 ```
 npm run start
-``
+```
+
