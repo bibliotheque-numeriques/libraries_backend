@@ -71,6 +71,15 @@ export const registerUser = async(req : Request, res : Response)=>{
   res.json({ user });
 }
 
+export const getUser = async (req : Request, res : Response) =>{
+  try{
+    const user = await  prisma.user.findFirst();
+    res.json({ user })
+  }catch(error){
+    res.status(500).json({ error: 'Could not find user' });
+  }
+}
+
 user.post('/user', LoginUser);
 user.post('/register',registerUser);
 

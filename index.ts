@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import {LoginUser, registerUser} from "./prisma/Contrôleur/login";
+import {LoginUser, getUser, registerUser} from "./prisma/Contrôleur/login";
 import {createBook,getBook} from "./prisma/Contrôleur/book";
 import { createAuthor, findAuthor } from "./prisma/Contrôleur/author";
 import { createCategory, findCategory } from "./prisma/Contrôleur/category";
@@ -17,6 +17,7 @@ app.use(cors({
 app.get('/book',getBook);
 app.get('/author',findAuthor);
 app.get('/category',findCategory);
+app.get('/user',getUser)
 
 
 app.post('/login', LoginUser);
