@@ -10,7 +10,7 @@ const port = 8080;
 app.use(express.json());
 
 app.use(cors({
-    origin: ['http://localhost:5173','https://e-library-api.onrender.com'],
+    origin: 'https://e-library-api.onrender.com',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
   }));
 
