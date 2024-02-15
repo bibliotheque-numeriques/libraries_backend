@@ -1,4 +1,5 @@
-import { Prisma, PrismaClient } from "@prisma/client";
+import { Author, Prisma, PrismaClient } from "@prisma/client";
+import e from "express";
 import express, { Request, Response } from "express";
 
 const prisma = new PrismaClient();
@@ -28,5 +29,23 @@ export const findAuthor = async (req: Request, res: Response) => {
 
   res.json({ author });
 };
+
+export const deleteAuthor = async (req: Request, res: Response) => {
+  const authorId = parseInt(req.params.id, 10);
+
+  try {
+    const deletedAuthor = await prisma.author.delete({
+      where: {
+        id_author: authorId,
+      },
+    });
+
+    res.json({ message: `Author with ID ${authorId} deleted successfully` });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "An error occurred while deleting the author" });
+  }
+};
+
 
 export default author;
