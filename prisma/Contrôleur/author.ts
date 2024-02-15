@@ -47,5 +47,31 @@ export const deleteAuthor = async (req: Request, res: Response) => {
   }
 };
 
+export const updateAuthor = async (req: Request, res: Response) => {
+  const authorId = parseInt(req.params.id, 10);
+  const { name, first_name, biography, nationality, die_date, birth_date } =
+    req.body;
+
+  try {
+    const updateAuthor = await prisma.author.update({
+      where: {
+        id_author: authorId,
+      },
+      data: {
+        name: name,
+        first_name: first_name,
+        biography: biography,
+        nationality: nationality,
+        die_date: die_date,
+        birth_date: birth_date,
+      },
+    });
+
+    res.json({ message: `Author with ID ${authorId} updated successfully` });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "An error occurred while updating the author" });
+  }
+};
 
 export default author;
