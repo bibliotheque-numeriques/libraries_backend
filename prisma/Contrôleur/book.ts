@@ -66,4 +66,40 @@ export const deleteBook = async (req: Request, res: Response) => {
   }
 };
 
+export const updateBook = async (req: Request, res: Response) => {
+  const bookId = parseInt(req.params.id, 10);
+  const {
+    title,
+    page,
+    langage,
+    description,
+    parution_date,
+    link_image_book,
+    id_category,
+    id_author,
+  } = req.body;
+  try {
+    const updateBook = await prisma.book.update({
+      where: {
+        id_book: bookId,
+      },
+      data: {
+        title: title,
+        page: page,
+        langage: langage,
+        description: description,
+        parution_date: parution_date,
+        link_image_book: link_image_book,
+        id_category: id_category,
+        id_author: id_author,
+      },
+    });
+
+    res.json({ message: `Book with ID ${bookId} updated successfully` });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "An error occurred while updating the book" });
+  }
+};
+
 export default book;

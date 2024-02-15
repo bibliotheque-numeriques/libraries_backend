@@ -41,4 +41,25 @@ export const deleteCategory = async (req: Request, res: Response) => {
   }
 };
 
+export const updateCategory = async (req: Request, res: Response) => {
+  const categoryId = parseInt(req.params.id, 10);
+  const { type, description } = req.body;
+  try {
+    const updateCategory = await prisma.category.update({
+      where: {
+        id_category: categoryId,
+      },
+      data: {
+        type: type,
+        description: description,
+      },
+    });
+
+    res.json({ message: `Category with ID ${categoryId} updated successfully` });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "An error occurred while updating the category" });
+  }
+};
+
 export default category;

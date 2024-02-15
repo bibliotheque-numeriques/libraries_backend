@@ -1,8 +1,8 @@
 import express, { Request, Response } from "express";
 import { LoginUser, getUser, registerUser } from "./prisma/Contrôleur/login";
 import { createBook, deleteBook, getBook } from "./prisma/Contrôleur/book";
-import { createAuthor, deleteAuthor, findAuthor } from "./prisma/Contrôleur/author";
-import { createCategory, deleteCategory, findCategory } from "./prisma/Contrôleur/category";
+import { createAuthor, deleteAuthor, findAuthor, updateAuthor } from "./prisma/Contrôleur/author";
+import { createCategory, deleteCategory, findCategory, updateCategory } from "./prisma/Contrôleur/category";
 import cors from "cors";
 
 const app = express();
@@ -29,6 +29,10 @@ app.post("/category", createCategory);
 app.delete("/category", deleteCategory);
 app.delete("/author", deleteAuthor);
 app.delete("/book", deleteBook);
+
+app.put("/book", updateAuthor);
+app.put("/category", updateCategory);
+app.put("/author", updateAuthor);
 
 app.listen(port, () => {
   console.log(`Server is running on port: http://localhost:${port}`);
