@@ -11,7 +11,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: "https://e-library-api.onrender.com",
+    origin: "*",
     methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );
