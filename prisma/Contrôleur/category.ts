@@ -24,4 +24,21 @@ export const findCategory = async (req: Request, res: Response) => {
   res.json({ category });
 };
 
+export const deleteCategory = async (req: Request, res: Response) => {
+  const categoryId = parseInt(req.params.id, 10);
+
+  try {
+    const deleteCategory = await prisma.category.delete({
+      where: {
+        id_category: categoryId,
+      },
+    });
+
+    res.json({ message: `Category with ID ${categoryId} deleted successfully` });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "An error occurred while deleting the category" });
+  }
+};
+
 export default category;

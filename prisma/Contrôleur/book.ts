@@ -49,4 +49,21 @@ export const getBook = async (req: Request, res: Response) => {
   }
 };
 
+export const deleteBook = async (req: Request, res: Response) => {
+  const bookId = parseInt(req.params.id, 10);
+
+  try {
+    const deleteBook = await prisma.book.delete({
+      where: {
+        id_book: bookId,
+      },
+    });
+
+    res.json({ message: `Book with ID ${bookId} deleted successfully` });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "An error occurred while deleting the book" });
+  }
+};
+
 export default book;
