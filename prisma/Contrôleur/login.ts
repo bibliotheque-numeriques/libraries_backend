@@ -19,6 +19,7 @@ export const LoginUser = async (req: Request, res: Response) => {
     user = await prisma.user.findFirst({
       where: {
         email: email,
+        password:password
       },
     });
   } catch (error) {
