@@ -80,8 +80,7 @@ export const getUser = async (req : Request, res : Response) =>{
   }
 }
 
-user.post('/user', LoginUser);
-user.post('/register',registerUser);
+
 
 
 export default user;

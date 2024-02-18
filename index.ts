@@ -6,7 +6,7 @@ import { createCategory, findCategory } from "./prisma/Contrôleur/category";
 import cors from 'cors';
 
 const app = express();
-const port = 8080;
+const port = 5000;
 app.use(express.json());
 
 app.use(cors({
