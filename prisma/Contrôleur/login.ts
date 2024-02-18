@@ -6,7 +6,6 @@ import jwt from "jsonwebtoken";
 
 const user = express();
 const prisma = new PrismaClient();
-const JWT_SECRET = process.env.JWT_SECRET!;
 user.use(express.json());
 const schema = new passwordValidator();
 schema.is().min(8).has().uppercase().has().digits();
@@ -39,7 +38,9 @@ export const LoginUser = async (req: Request, res: Response) => {
 
   const token = jwt.sign(
     {
-      user_id: typedUser.id_user,
+    
+      email: typedUser.email,
+      
     },
     "helloyou",
   );
@@ -59,8 +60,13 @@ export const registerUser = async (req: Request, res: Response) => {
     role,
   } = req.body;
 
+
+  let user = await prisma.user.findFirst({where : {email}})
+  if(user){
+    throw Error('User already exists !')
+  }
   const hashedPassword = await bcrypt.hash(password, 10);
-  const user = await prisma.user.create({
+   user = await prisma.user.create({
     data: {
       name: name,
       first_name: first_name,
@@ -79,7 +85,7 @@ export const registerUser = async (req: Request, res: Response) => {
 
 export const getUser = async (req: Request, res: Response) => {
   try {
-    const user = await prisma.user.findFirst();
+    const user = await prisma.user.findMany();
     res.json({ user });
   } catch (error) {
     res.status(500).json({ error: "Could not find user" });

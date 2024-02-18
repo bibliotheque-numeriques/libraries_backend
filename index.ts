@@ -21,10 +21,9 @@ app.get("/book", getBook);
 app.get("/author", findAuthor);
 app.get("/category", findCategory);
 app.get("/user", getUser);
-
 app.get('/protected', verifyToken, (req, res) => {
-  const userId = req.body.user_id;
-  res.json({ message: "Route protégée", userId });
+  const userEmail = req.body.email;
+  res.json({ message: "Route protégée", userEmail });
 });
 app.post("/login", LoginUser);
 app.post("/register", registerUser);
